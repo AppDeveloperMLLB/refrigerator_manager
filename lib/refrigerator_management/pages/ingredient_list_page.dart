@@ -1,15 +1,16 @@
 //import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:refrigerator_management/refrigerator_management/providers/ingredient_list_provider.dart';
 
-var listPageKey = GlobalKey<IngredientListPage>();
+class IngredientListPage extends ConsumerStatefulWidget {
+  const IngredientListPage({Key? key}) : super(key: key);
 
-class IngredientListPage extends StatefulWidget {
-  const IngredientListPage({Key key}) : super(key: key);
   @override
   _IngredientListState createState() => _IngredientListState();
 }
 
-class _IngredientListState extends State<IngredientListPage> {
+class _IngredientListState extends ConsumerState<IngredientListPage> {
   @override
   void initState() {
     super.initState();
@@ -22,9 +23,8 @@ class _IngredientListState extends State<IngredientListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RewardListNotifier>(builder: (context, viewModel, _) {
       return FutureBuilder(
-          future: viewModel.findAll(),
+          future: ref.listen(provider, (previous, next) { })
           builder:
               (BuildContext context, AsyncSnapshot<List<Reward>> snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
@@ -95,6 +95,5 @@ class _IngredientListState extends State<IngredientListPage> {
               ],
             );
           });
-    });
   }
 }

@@ -1,59 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:refrigerator_management/refrigerator_management/domain/model/ingredient_category.dart';
 import 'package:refrigerator_management/refrigerator_management/domain/model/ingredient_state.dart';
-import 'package:uuid/uuid.dart';
 
-final myProvider = Provider((ref) {
-  return MyValue();
-});
-
-class IngredientList extends StateNotifier<List<MyClass>> {
-  IngredientList() : super([]);
-
-  void increment(MyClass myClass) => state.add(myClass);
-  MyClass get(int index) => state[index];
-}
-
-final counterProvider =
-    StateNotifierProvider<IngredientList, List<MyClass>>((ref) {
-  return IngredientList();
-});
-
-class IngredientListNotifier extends StateNotifier<List<List<MyClass>>> {
+class IngredientListNotifier extends StateNotifier<List<Ingredient>> {
   IngredientListNotifier() : super([]);
 
-  void add(String content) {
-    var uuid = Uuid();
-    var newId = uuid.v4();
-    while (state.any((balloon) => balloon.id == newId)) {
-      newId = uuid.v4();
-    }
-    var newBalloon = Balloon(id: newId, content: content);
-    state = [...state, newBalloon];
-  }
-
-  void removeTodo(String id) {
-    state.forEach((element) {
-      if (element.id == id) {
-        element.deleted = true;
-      }
-    });
-    // state = [
-    //   for (final balloon in state)
-    //     if (balloon.id != id) balloon,
-    // ];
-  }
-
-  void allDelete() {
-    state.forEach((element) {
-      element.clear();
-    });
-  }
+  void add(Ingredient ingredient) => state.add(ingredient);
+  Ingredient get(IngredientId id) =>
+      state.firstWhere((element) => element.id == id);
 }
 
-// 最後に TodosNotifier のインスタンスを値に持つ StateNotifierProvider を作成し、
-// UI 側から Todo リストを操作することを可能にします。
-final IngredientListProvider =
-    StateNotifierProvider<IngredientListNotifier, List<Balloon>>((ref) {
+final ingredientListProvider =
+    StateNotifierProvider<IngredientListNotifier, List<Ingredient>>((ref) {
   return IngredientListNotifier();
 });

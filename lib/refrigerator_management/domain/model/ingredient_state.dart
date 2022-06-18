@@ -1,21 +1,23 @@
 import 'dart:io';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:refrigerator_management/refrigerator_management/domain/model/ingredient_category.dart';
 
 part 'ingredient_state.freezed.dart';
 
-enum Direction { left, top, right, bottom }
-
 @freezed
 class IngredientId with _$IngredientId {
-  factory IngredientId({String id}) = _IngredientId;
+  factory IngredientId({required String id}) = _IngredientId;
 }
 
 @freezed
-class IngredientCategory with _$IngredientCategory {
-  factory IngredientCategory({String id}) = _IngredientCategory;
+class IngredientName with _$IngredientName {
+  factory IngredientName({required String name}) = _IngredientName;
 }
 
 @freezed
 class Ingredient with _$Ingredient {
-  factory Ingredient({IngredientId a, int? b}) = _Ingredient;
+  factory Ingredient(
+      {required IngredientId id,
+      required IngredientCategory category,
+      required IngredientName name}) = _Ingredient;
 }
