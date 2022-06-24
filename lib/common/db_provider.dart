@@ -41,15 +41,14 @@ class DBProvider {
   Future<void> _createTable(Database db, int version) async {
     await db.execute("CREATE TABLE ${IngredientTableInfo.tableName} ("
         "${IngredientTableInfo.columnId} TEXT PRIMARY KEY,"
-        "${IngredientTableInfo.columnId} TEXT,"
-        "${IngredientTableInfo.columnId} TEXT"
+        "${IngredientTableInfo.columnCategoryId} TEXT,"
+        "${IngredientTableInfo.columnName} TEXT,"
+        "FOREIGN KEY(${IngredientTableInfo.columnCategoryId}) "
+        "REFERENCES ${IngredientCategoryTableInfo.tableName}(${IngredientCategoryTableInfo.columnId})"
         ")");
-
     await db.execute("CREATE TABLE ${IngredientCategoryTableInfo.tableName} ("
         "${IngredientCategoryTableInfo.columnId} TEXT PRIMARY KEY,"
-        "${IngredientCategoryTableInfo.columnName} TEXT,"
-        "FOREIGN KEY(${IngredientCategoryTableInfo.columnId}) "
-        "REFERENCES ${IngredientTableInfo.tableName}(${IngredientTableInfo.columnId})"
+        "${IngredientCategoryTableInfo.columnName} TEXT"
         ")");
   }
 }

@@ -1,4 +1,5 @@
 enum IngredientCategory {
+  none,
   sweets,
   drink,
   meat,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:refrigerator_management/refrigerator_management/pages/edit_ingredient/edit_ingredient_page.dart';
 
 import 'home_screen.dart';
 
@@ -17,7 +18,14 @@ final appRouter = GoRouter(
         child: HomeScreen(),
       ),
     ),
-
+    // EditIngredientPage
+    GoRoute(
+      path: '/edit_ingredient',
+      pageBuilder: (context, state) => const MaterialPage<void>(
+        key: _pageKey,
+        child: EditIngredientPage(),
+      ),
+    ),
     // // PlaylistHomeScreen
     // GoRoute(
     //   path: '/playlists',

@@ -14,10 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+IngredientId _$IngredientIdFromJson(Map<String, dynamic> json) {
+  return _IngredientId.fromJson(json);
+}
+
 /// @nodoc
 mixin _$IngredientId {
   String get id => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $IngredientIdCopyWith<IngredientId> get copyWith =>
       throw _privateConstructorUsedError;
@@ -87,9 +92,12 @@ class __$$_IngredientIdCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_IngredientId implements _IngredientId {
   _$_IngredientId({required this.id});
+
+  factory _$_IngredientId.fromJson(Map<String, dynamic> json) =>
+      _$$_IngredientIdFromJson(json);
 
   @override
   final String id;
@@ -107,6 +115,7 @@ class _$_IngredientId implements _IngredientId {
             const DeepCollectionEquality().equals(other.id, id));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
@@ -115,10 +124,18 @@ class _$_IngredientId implements _IngredientId {
   @override
   _$$_IngredientIdCopyWith<_$_IngredientId> get copyWith =>
       __$$_IngredientIdCopyWithImpl<_$_IngredientId>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_IngredientIdToJson(this);
+  }
 }
 
 abstract class _IngredientId implements IngredientId {
   factory _IngredientId({required final String id}) = _$_IngredientId;
+
+  factory _IngredientId.fromJson(Map<String, dynamic> json) =
+      _$_IngredientId.fromJson;
 
   @override
   String get id => throw _privateConstructorUsedError;
@@ -128,10 +145,15 @@ abstract class _IngredientId implements IngredientId {
       throw _privateConstructorUsedError;
 }
 
+IngredientName _$IngredientNameFromJson(Map<String, dynamic> json) {
+  return _IngredientName.fromJson(json);
+}
+
 /// @nodoc
 mixin _$IngredientName {
   String get name => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $IngredientNameCopyWith<IngredientName> get copyWith =>
       throw _privateConstructorUsedError;
@@ -202,9 +224,12 @@ class __$$_IngredientNameCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_IngredientName implements _IngredientName {
   _$_IngredientName({required this.name});
+
+  factory _$_IngredientName.fromJson(Map<String, dynamic> json) =>
+      _$$_IngredientNameFromJson(json);
 
   @override
   final String name;
@@ -222,6 +247,7 @@ class _$_IngredientName implements _IngredientName {
             const DeepCollectionEquality().equals(other.name, name));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
@@ -230,10 +256,18 @@ class _$_IngredientName implements _IngredientName {
   @override
   _$$_IngredientNameCopyWith<_$_IngredientName> get copyWith =>
       __$$_IngredientNameCopyWithImpl<_$_IngredientName>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_IngredientNameToJson(this);
+  }
 }
 
 abstract class _IngredientName implements IngredientName {
   factory _IngredientName({required final String name}) = _$_IngredientName;
+
+  factory _IngredientName.fromJson(Map<String, dynamic> json) =
+      _$_IngredientName.fromJson;
 
   @override
   String get name => throw _privateConstructorUsedError;
@@ -243,12 +277,17 @@ abstract class _IngredientName implements IngredientName {
       throw _privateConstructorUsedError;
 }
 
+Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
+  return _Ingredient.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Ingredient {
   IngredientId get id => throw _privateConstructorUsedError;
   IngredientCategory get category => throw _privateConstructorUsedError;
   IngredientName get name => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $IngredientCopyWith<Ingredient> get copyWith =>
       throw _privateConstructorUsedError;
@@ -361,9 +400,13 @@ class __$$_IngredientCopyWithImpl<$Res> extends _$IngredientCopyWithImpl<$Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$_Ingredient extends _Ingredient {
+  _$_Ingredient({required this.id, required this.category, required this.name})
+      : super._();
 
-class _$_Ingredient implements _Ingredient {
-  _$_Ingredient({required this.id, required this.category, required this.name});
+  factory _$_Ingredient.fromJson(Map<String, dynamic> json) =>
+      _$$_IngredientFromJson(json);
 
   @override
   final IngredientId id;
@@ -387,6 +430,7 @@ class _$_Ingredient implements _Ingredient {
             const DeepCollectionEquality().equals(other.name, name));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -398,13 +442,22 @@ class _$_Ingredient implements _Ingredient {
   @override
   _$$_IngredientCopyWith<_$_Ingredient> get copyWith =>
       __$$_IngredientCopyWithImpl<_$_Ingredient>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_IngredientToJson(this);
+  }
 }
 
-abstract class _Ingredient implements Ingredient {
+abstract class _Ingredient extends Ingredient {
   factory _Ingredient(
       {required final IngredientId id,
       required final IngredientCategory category,
       required final IngredientName name}) = _$_Ingredient;
+  _Ingredient._() : super._();
+
+  factory _Ingredient.fromJson(Map<String, dynamic> json) =
+      _$_Ingredient.fromJson;
 
   @override
   IngredientId get id => throw _privateConstructorUsedError;

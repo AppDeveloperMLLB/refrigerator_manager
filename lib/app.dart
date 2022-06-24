@@ -1,55 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:refrigerator_management/material_color.dart';
 import 'package:refrigerator_management/theme.dart';
+import 'package:refrigerator_management/theme/app_theme.dart';
 import 'router.dart';
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  ConsumerState<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
+    final theme = ref.watch(appThemeProvider);
+    final themeMode = ref.watch(appThemeModeProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Flutter Dd',
       theme: ThemeData(
         primarySwatch: MaterialColors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: "Sawarabi Cothic",
         //colorScheme: ,
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: MaterialColors.black,
       ),
-      // Add dark theme
-      // Add theme mode
+      themeMode: ThemeMode.system,
+      //theme: theme.data,
+      //darkTheme: AppTheme.dark().data,
+      //themeMode: themeMode,
       routeInformationParser: appRouter.routeInformationParser,
       routerDelegate: appRouter.routerDelegate,
     );
-    // return BlocProvider<PlaybackBloc>(
-    //   create: (context) => PlaybackBloc(),
-    //   child: DynamicColorBuilder(
-    //     builder: (lightDynamic, darkDynamic) => ThemeProvider(
-    //         lightDynamic: lightDynamic,
-    //         darkDynamic: darkDynamic,
-    //         settings: settings,
-    //         child: NotificationListener<ThemeSettingChange>(
-    //           onNotification: (notification) {
-    //             settings.value = notification.settings;
-    //             return true;
-    //           },
-    //           child: ValueListenableBuilder<ThemeSettings>(
-    //             valueListenable: settings,
-    //             builder: (context, value, _) {
-    //
-    //             },
-    //           ),
-    //         )),
-    //   ),
-    // );
   }
 }
