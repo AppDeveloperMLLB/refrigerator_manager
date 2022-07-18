@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:refrigerator_management/refrigerator_management/application/ingredient_output_data.dart';
+import 'package:refrigerator_management/refrigerator_management/presentation/providers/edit_ingredient_provider.dart';
 import 'package:refrigerator_management/theme/app_theme.dart';
 import 'package:refrigerator_management/theme/font_size.dart';
 
 class EditIngredientPage extends ConsumerStatefulWidget {
-  const EditIngredientPage({Key? key}) : super(key: key);
+  final IngredientOutputData initialData;
+  const EditIngredientPage({Key? key, required this.initialData}) : super(key: key);
 
   @override
-  _EditIngredientPageState createState() => _EditIngredientPageState();
+  ConsumerState<EditIngredientPage> createState() => _EditIngredientPageState();
 }
 
 class _EditIngredientPageState extends ConsumerState<EditIngredientPage> {
   String dropdownValue = 'One';
+
+  @override
+  void initState() {
+    ref.read(editIngredientProvider.notifier).init(initialData: widget.initialData);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +29,30 @@ class _EditIngredientPageState extends ConsumerState<EditIngredientPage> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        leadingWidth: 150,
-        leading: TextButton(
-          onPressed: () {
-            GoRouter.of(context).go("/");
-          },
-          child: Text(
-            "キャンセル",
-            style: textTheme.h50.copyWith(color: Colors.blueAccent),
-          ),
+        leading: IconButton(
+          onPressed: () => GoRouter.of(context).go("/"),
+          icon: const Icon(Icons.arrow_back),
         ),
+        actions: [
+          IconButton(
+              onPressed: (){
+                // TODO:save
+              },
+              icon: const Icon(Icons.check))
+        ],
       ),
+      //     AppBar(
+      //   leadingWidth: 150,
+      //   leading: TextButton(
+      //     onPressed: () {
+      //       GoRouter.of(context).go("/");
+      //     },
+      //     child: Text(
+      //       "キャンセル",
+      //       style: textTheme.h50.copyWith(color: Colors.blueAccent),
+      //     ),
+      //   ),
+      // ),
       body: Column(
         children: [
           DropdownButton<String>(
@@ -55,7 +77,7 @@ class _EditIngredientPageState extends ConsumerState<EditIngredientPage> {
               );
             }).toList(),
           ),
-          TextField(
+          const TextField(
             decoration: InputDecoration(hintText: '食材などの名前を入力'),
           ),
           Container(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:refrigerator_management/refrigerator_management/providers/ingredient_list_provider.dart';
-import 'package:refrigerator_management/refrigerator_management/use_case/dto/ingredient_output_data.dart';
+
+import '../../application/ingredient_output_data.dart';
+import '../providers/ingredient_list_provider.dart';
 
 class AnimatedIngredientList extends ConsumerStatefulWidget {
   const AnimatedIngredientList({Key? key}) : super(key: key);

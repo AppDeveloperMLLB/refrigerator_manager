@@ -1,14 +1,14 @@
 import 'package:refrigerator_management/refrigerator_management/domain/model/ingredient_category.dart';
 import 'package:refrigerator_management/refrigerator_management/domain/model/ingredient_state.dart';
 import 'package:refrigerator_management/refrigerator_management/domain/repos/ingredient_repo_base.dart';
-import 'package:refrigerator_management/refrigerator_management/use_case/dto/ingredient_output_data.dart';
-import 'package:refrigerator_management/refrigerator_management/use_case/dto/add_ingredient_input_data.dart';
 import 'package:uuid/uuid.dart';
+import '../../application/ingredient_output_data.dart';
+import 'add_ingredient_input_data.dart';
 
-class AddIngredientUseCase {
+class AddIngredientService {
   final IngredientRepoBase _ingredientRepo;
 
-  AddIngredientUseCase(this._ingredientRepo);
+  AddIngredientService(this._ingredientRepo);
 
   Future<IngredientOutputData> handle(AddIngredientInputData inputData) async {
     final newId = const Uuid().v4();
