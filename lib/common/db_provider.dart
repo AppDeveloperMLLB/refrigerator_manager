@@ -41,14 +41,9 @@ class DBProvider {
   Future<void> _createTable(Database db, int version) async {
     await db.execute("CREATE TABLE ${IngredientTableInfo.tableName} ("
         "${IngredientTableInfo.columnId} TEXT PRIMARY KEY,"
-        "${IngredientTableInfo.columnCategoryId} TEXT,"
+        "${IngredientTableInfo.columnCategory} TEXT,"
         "${IngredientTableInfo.columnName} TEXT,"
-        "FOREIGN KEY(${IngredientTableInfo.columnCategoryId}) "
-        "REFERENCES ${IngredientCategoryTableInfo.tableName}(${IngredientCategoryTableInfo.columnId})"
-        ")");
-    await db.execute("CREATE TABLE ${IngredientCategoryTableInfo.tableName} ("
-        "${IngredientCategoryTableInfo.columnId} TEXT PRIMARY KEY,"
-        "${IngredientCategoryTableInfo.columnName} TEXT"
+        "${IngredientTableInfo.columnExpirationData} TEXT"
         ")");
   }
 }
@@ -56,12 +51,7 @@ class DBProvider {
 class IngredientTableInfo {
   static const String tableName = "ingredient";
   static const String columnId = "id";
-  static const String columnCategoryId = "category_id";
+  static const String columnCategory = "category";
   static const String columnName = "name";
-}
-
-class IngredientCategoryTableInfo {
-  static const String tableName = "ingredient_category";
-  static const String columnId = "id";
-  static const String columnName = "name";
+  static const String columnExpirationData = "expiration_date";
 }

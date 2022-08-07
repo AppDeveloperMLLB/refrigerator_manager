@@ -1,35 +1,47 @@
 import 'package:refrigerator_management/common/db_provider.dart';
-import 'package:refrigerator_management/refrigerator_management/domain/model/ingredient_category.dart';
-import 'package:refrigerator_management/refrigerator_management/domain/model/ingredient_state.dart';
+import 'package:refrigerator_management/refrigerator_management/domain/model/models.dart';
 import 'package:refrigerator_management/refrigerator_management/domain/repos/ingredient_repo_base.dart';
 
+// TODO:ファイル移動
+//　TODO:時刻の書き込み読み込みできるか確認
 class IngredientRepo extends IngredientRepoBase {
   @override
-  Future<Ingredient> get(IngredientId id) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future<Ingredient> get(IngredientId id) async {
+    var database = await DBProvider.db.database;
+    final list = await database!.rawQuery("SELECT *"
+        " FROM ${IngredientTableInfo.tableName}"
+        "WHERE ${IngredientTableInfo.columnId} = ${id.id}");
+
+    if (list.isEmpty) {
+      throw Exception("not found");
+    }
+
+    return _fromMap(list[0]);
   }
 
   @override
-  Future<List<Ingredient>> fetchAll() async {
+  Future<IngredientList> fetchAll() async {
     var database = await DBProvider.db.database;
-    final list = await database!
-        .rawQuery("SELECT * FROM ${IngredientTableInfo.tableName}");
+    final list = await database!.rawQuery("SELECT *"
+        " FROM ${IngredientTableInfo.tableName}");
 
     // なければ0で作成
-    if (list.length == 0) {
-      return [];
+    if (list.isEmpty) {
+      return IngredientList.getEmpty();
     }
 
-    return List.generate(list.length, (index) {
-      return fromMap(list[index]);
+    final ingredientList = List.generate(list.length, (index) {
+      return _fromMap(list[index]);
     });
+
+    return IngredientList(
+        ingredientList: ingredientList, alertDays: IngredientList.alertDays);
   }
 
   @override
   Future<void> add(Ingredient ingredient) async {
     var database = await DBProvider.db.database;
-    database!.insert(IngredientTableInfo.tableName, toMap(ingredient));
+    database!.insert(IngredientTableInfo.tableName, _toMap(ingredient));
   }
 
   @override
@@ -45,28 +57,44 @@ class IngredientRepo extends IngredientRepoBase {
   @override
   Future<void> update(Ingredient ingredient) async {
     var database = await DBProvider.db.database;
-    await database!.update(IngredientTableInfo.tableName, toMap(ingredient),
+    await database!.update(IngredientTableInfo.tableName, _toMap(ingredient),
         where: '${IngredientTableInfo.columnId} = ?',
         whereArgs: [ingredient.getId()]);
   }
 
-  Ingredient fromMap(Map<String, Object?> map) {
+  Ingredient _fromMap(Map<String, Object?> map) {
+    // ingredient id
     final id = map[IngredientTableInfo.columnId].toString();
     final ingredientId = IngredientId(id: id);
-    final category =
-        int.parse(map[IngredientTableInfo.columnCategoryId].toString());
-    final ingredientCategory = IngredientCategory.meat;
+
+    // category name
+    final category = map[IngredientTableInfo.columnCategory].toString();
+    final ingredientCategory = IngredientCategoryName(name: category);
+
+    // ingredient name
     final ingredientName =
         IngredientName(name: map[IngredientTableInfo.columnName].toString());
+
+    final expirationDate =
+        DateTime.parse(map[IngredientTableInfo.columnExpirationData].toString())
+            .toLocal();
+
+    // create Ingredient instance
     return Ingredient(
-        id: ingredientId, category: ingredientCategory, name: ingredientName);
+      id: ingredientId,
+      categoryName: ingredientCategory,
+      name: ingredientName,
+      expirationDate: expirationDate,
+    );
   }
 
-  Map<String, Object?> toMap(Ingredient ingredient) {
+  Map<String, Object?> _toMap(Ingredient ingredient) {
     return {
       IngredientTableInfo.columnId: ingredient.id.id,
-      IngredientTableInfo.columnCategoryId: ingredient.category.index,
-      IngredientTableInfo.columnName: ingredient.name.name
+      IngredientTableInfo.columnCategory: ingredient.categoryName.name,
+      IngredientTableInfo.columnName: ingredient.name.name,
+      IngredientTableInfo.columnExpirationData:
+          ingredient.expirationDate.toString(),
     };
   }
 }

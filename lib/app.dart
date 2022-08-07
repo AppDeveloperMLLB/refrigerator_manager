@@ -18,19 +18,22 @@ class _MyAppState extends ConsumerState<MyApp> {
     final theme = ref.watch(appThemeProvider);
     final themeMode = ref.watch(appThemeModeProvider);
 
+    // TODO:ダークテーマ追加？？
+    // TODO:アプリのテーマを考えたい(カスタムにすると、カレンダーとかのボタンがおかしくなる。。。
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Dd',
       theme: ThemeData(
-        primarySwatch: MaterialColors.white,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.blue,
+        // primarySwatch: MaterialColors.white,
+        // visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: "Sawarabi Cothic",
         //colorScheme: ,
       ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: MaterialColors.black,
-      ),
+      // darkTheme: ThemeData(
+      //   brightness: Brightness.dark,
+      //   primarySwatch: MaterialColors.black,
+      // ),
       themeMode: ThemeMode.system,
       //theme: theme.data,
       //darkTheme: AppTheme.dark().data,

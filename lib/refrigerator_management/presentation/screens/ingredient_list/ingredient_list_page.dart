@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:refrigerator_management/common/components/expansion_tile_list.dart';
+import 'package:refrigerator_management/refrigerator_management/presentation/screens/ingredient_list/expired_ingredient_list_widget.dart';
+import 'package:refrigerator_management/refrigerator_management/presentation/screens/ingredient_list/ingredient_list_with_sufficient_expiration_date.dart';
+import 'package:refrigerator_management/refrigerator_management/presentation/screens/ingredient_list/soon_expired_ingredient_list_widget.dart';
+import 'package:refrigerator_management/router.dart';
 
 import '../../../application/ingredient_output_data.dart';
 import '../../providers/ingredient_list_provider.dart';
+import '../../providers/ingredient_list_state.dart';
 
 class IngredientListPage extends ConsumerStatefulWidget {
   const IngredientListPage({Key? key}) : super(key: key);
@@ -30,90 +36,52 @@ class _IngredientListState extends ConsumerState<IngredientListPage> {
     return ingredients.when(
       data: (data) => Scaffold(
         appBar: AppBar(
-          leading: const Icon(Icons.arrow_back),
-          actions: [
-            IconButton(
-                onPressed: (){
-                  // TODO:save
-                },
-                icon: const Icon(Icons.check))
-          ],
+          title: const Text("食材リスト"),
         ),
         body: SafeArea(
           child: Column(
             children: <Widget>[
-              Expanded(child: _buildList(data)),
+              ExpiredIngredientListWidget(
+                expiredIngredientList: data.expiredList,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              SoonExpiredIngredientListWidget(
+                soonExpiredIngredientList: data.soonExpiredList,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              IngredientListWithSufficientExpirationDateWidget(
+                ingredientListWithSufficientExpirationDate:
+                    data.ingredientListWithSufficientExpirationDate,
+              ),
               Container(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: const Text('AdMob')
+                padding: const EdgeInsets.only(top: 8),
+                child: const Text('AdMob'),
                 // ToDo: implement AdMob().getBanner(),
               ),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: "addButton",
           child: const Icon(Icons.add),
           onPressed: () {
-            GoRouter.of(context).go('/add_ingredient');
+            GoRouter.of(context).goNamed(AppRoute.addIngredient.name);
           },
         ),
       ),
       loading: () => const Scaffold(
-          body:SafeArea(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
-      ),
+          body: SafeArea(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      )),
       error: (exception, __) => Center(
         child: Text(exception.toString()),
       ),
     );
   }
-
-  Widget _buildList(List<IngredientOutputData> dataList) {
-    return ListView.builder(
-        itemCount: dataList.length,
-        itemBuilder: (BuildContext context, int i) {
-          return _buildItem(dataList[i]);
-        });
-  }
-
-  Widget _buildItem(IngredientOutputData data) {
-    return Dismissible(
-      key: ObjectKey(data),
-      child: Slidable(
-        endActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          children: [
-            SlidableAction(
-              onPressed: (BuildContext context) {
-                ref.read(ingredientListProvider.notifier).delete(data.id);
-              },
-              icon: Icons.delete,
-              label: 'Delete',
-            ),
-          ],
-        ),
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              onTap: () {
-                GoRouter.of(context).goNamed('/update_ingredient', extra: data);
-              },
-              title: Text(
-                data.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              leading: const Icon(Icons.book),
-            ),
-            const Divider(height: 0)
-          ],
-        ),
-      ),
-    );
-  }
-
-  void pressed(BuildContext context) {}
 }
