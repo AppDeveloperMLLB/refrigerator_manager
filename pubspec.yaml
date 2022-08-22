@@ -49,6 +49,8 @@ dependencies:
   google_fonts: ^3.0.1
   intl:
   rxdart:
+  firebase_core: ^1.21.0
+  firebase_messaging: ^12.0.3
 
 dev_dependencies:
   flutter_test:
