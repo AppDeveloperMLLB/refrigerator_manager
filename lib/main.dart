@@ -16,7 +16,7 @@ void main() async {
   );
   // FCM の通知権限リクエスト
   final messaging = FirebaseMessaging.instance;
-  await messaging.requestPermission(
+  NotificationSettings settings = await messaging.requestPermission(
     alert: true,
     announcement: false,
     badge: true,
@@ -25,6 +25,17 @@ void main() async {
     provisional: false,
     sound: true,
   );
+  //  = await messaging.requestPermission(
+  //   alert: true,
+  //   announcement: false,
+  //   badge: true,
+  //   carPlay: false,
+  //   criticalAlert: false,
+  //   provisional: false,
+  //   sound: true,
+  // );
+
+  print('User granted permission: ${settings.authorizationStatus}');
   final token = await messaging.getToken();
   print('🐯 FCM TOKEN: $token');
 
