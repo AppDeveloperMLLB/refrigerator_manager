@@ -1,4 +1,6 @@
+import 'package:refrigerator_management/refrigerator_management/domain/model/expiration_date.dart';
 import 'package:refrigerator_management/refrigerator_management/domain/model/models.dart';
+import 'package:refrigerator_management/refrigerator_management/domain/model/notification_id.dart';
 import 'package:refrigerator_management/refrigerator_management/domain/repos/ingredient_repo_base.dart';
 
 class InMemoryIngredientRepo implements IngredientRepoBase {
@@ -7,24 +9,27 @@ class InMemoryIngredientRepo implements IngredientRepoBase {
     ingredientList: [
       Ingredient(
         id: const IngredientId(id: '1'),
+        notificationId: const NotificationId(value: 1),
         categoryName:
             IngredientCategoryName(name: IngredientCategory.meat.name),
         name: const IngredientName(name: 'Meat'),
-        expirationDate: DateTime(2022, 8, 31),
+        expirationDate: ExpirationDate(value: DateTime(2022, 9, 31)),
       ),
       Ingredient(
         id: const IngredientId(id: '2'),
+        notificationId: const NotificationId(value: 1),
         categoryName:
             IngredientCategoryName(name: IngredientCategory.seafood.name),
         name: const IngredientName(name: 'Seafood'),
-        expirationDate: DateTime(2022, 8, 8),
+        expirationDate: ExpirationDate(value: DateTime(2022, 9, 3)),
       ),
       Ingredient(
         id: const IngredientId(id: '3'),
+        notificationId: const NotificationId(value: 1),
         categoryName:
             IngredientCategoryName(name: IngredientCategory.drink.name),
         name: const IngredientName(name: 'Drink'),
-        expirationDate: DateTime(2022, 7, 25),
+        expirationDate: ExpirationDate(value: DateTime(2022, 7, 25)),
       ),
     ],
     alertDays: IngredientList.alertDays,

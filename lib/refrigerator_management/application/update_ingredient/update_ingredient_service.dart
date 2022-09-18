@@ -12,6 +12,7 @@ class UpdateIngredientService {
   Future<void> handle(UpdateIngredientInputData input) async {
     final ingredient = IngredientFactory.create(
         id: input.id,
+        notificationId: input.notificationId,
         category: input.category,
         name: input.name,
         expirationDate: input.expirationDate);

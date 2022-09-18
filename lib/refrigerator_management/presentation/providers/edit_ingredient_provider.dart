@@ -24,10 +24,12 @@ class EditIngredientNotifier
 
   void init(IngredientOutputData data) {
     _original = EditIngredientState(
-        id: data.id,
-        name: data.name,
-        category: data.category,
-        dateTime: data.expirationDate);
+      id: data.id,
+      notificationId: data.notificationId,
+      name: data.name,
+      category: data.category,
+      dateTime: data.expirationDate,
+    );
     state = AsyncValue.data(_original);
   }
 
@@ -42,7 +44,13 @@ class EditIngredientNotifier
       return Future.value();
     }
 
-    update(_original.id, name, category, expirationDate);
+    update(
+      _original.id,
+      _original.notificationId,
+      _original.name,
+      category,
+      expirationDate,
+    );
     onSaved();
     return Future.value();
   }
@@ -53,25 +61,36 @@ class EditIngredientNotifier
       final input = AddIngredientInputData(name, category, dateTime);
       final newIngredientData = await _addIngredientService.handle(input);
       _original = EditIngredientState(
-          id: newIngredientData.id,
-          name: name,
-          category: category,
-          dateTime: dateTime);
+        id: newIngredientData.id,
+        notificationId: newIngredientData.notificationId,
+        name: name,
+        category: category,
+        dateTime: dateTime,
+      );
       _ingredientListNotifier.refresh();
       return _original;
     });
   }
 
-  Future<void> update(
-      String id, String name, String category, DateTime dateTime) async {
+  Future<void> update(String id, int notificationId, String name,
+      String category, DateTime dateTime) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       final input = UpdateIngredientInputData(
-          id: id, category: category, name: name, expirationDate: dateTime);
+        id: id,
+        notificationId: notificationId,
+        category: category,
+        name: name,
+        expirationDate: dateTime,
+      );
       await _updateIngredientService.handle(input);
-      final outputData = IngredientOutputData(id, name, category, dateTime);
       _original = EditIngredientState(
-          id: id, name: name, category: category, dateTime: dateTime);
+        id: id,
+        notificationId: notificationId,
+        name: name,
+        category: category,
+        dateTime: dateTime,
+      );
       _ingredientListNotifier.refresh();
       return _original;
     });

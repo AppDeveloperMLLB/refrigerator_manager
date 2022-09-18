@@ -14,18 +14,14 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
-  return _Ingredient.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Ingredient {
   IngredientId get id => throw _privateConstructorUsedError;
+  NotificationId get notificationId => throw _privateConstructorUsedError;
   IngredientCategoryName get categoryName => throw _privateConstructorUsedError;
   IngredientName get name => throw _privateConstructorUsedError;
-  DateTime get expirationDate => throw _privateConstructorUsedError;
+  ExpirationDate get expirationDate => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $IngredientCopyWith<Ingredient> get copyWith =>
       throw _privateConstructorUsedError;
@@ -38,13 +34,16 @@ abstract class $IngredientCopyWith<$Res> {
       _$IngredientCopyWithImpl<$Res>;
   $Res call(
       {IngredientId id,
+      NotificationId notificationId,
       IngredientCategoryName categoryName,
       IngredientName name,
-      DateTime expirationDate});
+      ExpirationDate expirationDate});
 
   $IngredientIdCopyWith<$Res> get id;
+  $NotificationIdCopyWith<$Res> get notificationId;
   $IngredientCategoryNameCopyWith<$Res> get categoryName;
   $IngredientNameCopyWith<$Res> get name;
+  $ExpirationDateCopyWith<$Res> get expirationDate;
 }
 
 /// @nodoc
@@ -58,6 +57,7 @@ class _$IngredientCopyWithImpl<$Res> implements $IngredientCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? notificationId = freezed,
     Object? categoryName = freezed,
     Object? name = freezed,
     Object? expirationDate = freezed,
@@ -67,6 +67,10 @@ class _$IngredientCopyWithImpl<$Res> implements $IngredientCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as IngredientId,
+      notificationId: notificationId == freezed
+          ? _value.notificationId
+          : notificationId // ignore: cast_nullable_to_non_nullable
+              as NotificationId,
       categoryName: categoryName == freezed
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
@@ -78,7 +82,7 @@ class _$IngredientCopyWithImpl<$Res> implements $IngredientCopyWith<$Res> {
       expirationDate: expirationDate == freezed
           ? _value.expirationDate
           : expirationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as ExpirationDate,
     ));
   }
 
@@ -86,6 +90,13 @@ class _$IngredientCopyWithImpl<$Res> implements $IngredientCopyWith<$Res> {
   $IngredientIdCopyWith<$Res> get id {
     return $IngredientIdCopyWith<$Res>(_value.id, (value) {
       return _then(_value.copyWith(id: value));
+    });
+  }
+
+  @override
+  $NotificationIdCopyWith<$Res> get notificationId {
+    return $NotificationIdCopyWith<$Res>(_value.notificationId, (value) {
+      return _then(_value.copyWith(notificationId: value));
     });
   }
 
@@ -102,6 +113,13 @@ class _$IngredientCopyWithImpl<$Res> implements $IngredientCopyWith<$Res> {
       return _then(_value.copyWith(name: value));
     });
   }
+
+  @override
+  $ExpirationDateCopyWith<$Res> get expirationDate {
+    return $ExpirationDateCopyWith<$Res>(_value.expirationDate, (value) {
+      return _then(_value.copyWith(expirationDate: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -113,16 +131,21 @@ abstract class _$$_IngredientCopyWith<$Res>
   @override
   $Res call(
       {IngredientId id,
+      NotificationId notificationId,
       IngredientCategoryName categoryName,
       IngredientName name,
-      DateTime expirationDate});
+      ExpirationDate expirationDate});
 
   @override
   $IngredientIdCopyWith<$Res> get id;
   @override
+  $NotificationIdCopyWith<$Res> get notificationId;
+  @override
   $IngredientCategoryNameCopyWith<$Res> get categoryName;
   @override
   $IngredientNameCopyWith<$Res> get name;
+  @override
+  $ExpirationDateCopyWith<$Res> get expirationDate;
 }
 
 /// @nodoc
@@ -138,6 +161,7 @@ class __$$_IngredientCopyWithImpl<$Res> extends _$IngredientCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? notificationId = freezed,
     Object? categoryName = freezed,
     Object? name = freezed,
     Object? expirationDate = freezed,
@@ -147,6 +171,10 @@ class __$$_IngredientCopyWithImpl<$Res> extends _$IngredientCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as IngredientId,
+      notificationId: notificationId == freezed
+          ? _value.notificationId
+          : notificationId // ignore: cast_nullable_to_non_nullable
+              as NotificationId,
       categoryName: categoryName == freezed
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
@@ -158,36 +186,36 @@ class __$$_IngredientCopyWithImpl<$Res> extends _$IngredientCopyWithImpl<$Res>
       expirationDate: expirationDate == freezed
           ? _value.expirationDate
           : expirationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as ExpirationDate,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_Ingredient extends _Ingredient {
   _$_Ingredient(
       {required this.id,
+      required this.notificationId,
       required this.categoryName,
       required this.name,
       required this.expirationDate})
       : super._();
 
-  factory _$_Ingredient.fromJson(Map<String, dynamic> json) =>
-      _$$_IngredientFromJson(json);
-
   @override
   final IngredientId id;
+  @override
+  final NotificationId notificationId;
   @override
   final IngredientCategoryName categoryName;
   @override
   final IngredientName name;
   @override
-  final DateTime expirationDate;
+  final ExpirationDate expirationDate;
 
   @override
   String toString() {
-    return 'Ingredient(id: $id, categoryName: $categoryName, name: $name, expirationDate: $expirationDate)';
+    return 'Ingredient(id: $id, notificationId: $notificationId, categoryName: $categoryName, name: $name, expirationDate: $expirationDate)';
   }
 
   @override
@@ -197,17 +225,19 @@ class _$_Ingredient extends _Ingredient {
             other is _$_Ingredient &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
+                .equals(other.notificationId, notificationId) &&
+            const DeepCollectionEquality()
                 .equals(other.categoryName, categoryName) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.expirationDate, expirationDate));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(notificationId),
       const DeepCollectionEquality().hash(categoryName),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(expirationDate));
@@ -216,32 +246,27 @@ class _$_Ingredient extends _Ingredient {
   @override
   _$$_IngredientCopyWith<_$_Ingredient> get copyWith =>
       __$$_IngredientCopyWithImpl<_$_Ingredient>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_IngredientToJson(this);
-  }
 }
 
 abstract class _Ingredient extends Ingredient {
   factory _Ingredient(
       {required final IngredientId id,
+      required final NotificationId notificationId,
       required final IngredientCategoryName categoryName,
       required final IngredientName name,
-      required final DateTime expirationDate}) = _$_Ingredient;
+      required final ExpirationDate expirationDate}) = _$_Ingredient;
   _Ingredient._() : super._();
-
-  factory _Ingredient.fromJson(Map<String, dynamic> json) =
-      _$_Ingredient.fromJson;
 
   @override
   IngredientId get id => throw _privateConstructorUsedError;
+  @override
+  NotificationId get notificationId => throw _privateConstructorUsedError;
   @override
   IngredientCategoryName get categoryName => throw _privateConstructorUsedError;
   @override
   IngredientName get name => throw _privateConstructorUsedError;
   @override
-  DateTime get expirationDate => throw _privateConstructorUsedError;
+  ExpirationDate get expirationDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_IngredientCopyWith<_$_Ingredient> get copyWith =>

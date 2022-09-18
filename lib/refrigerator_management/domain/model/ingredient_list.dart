@@ -9,6 +9,8 @@ class IngredientList {
       : _ingredientList = ingredientList,
         _alertDays = alertDays;
 
+  int get length => _ingredientList.length;
+
   void add(Ingredient ingredient) {
     _ingredientList.add(ingredient);
   }
@@ -25,18 +27,18 @@ class IngredientList {
 
   List<Ingredient> getExpiredList() {
     return _ingredientList.where((element) {
-      return element.expirationDate.isBefore(DateTime.now());
+      return element.expirationDate.value.isBefore(DateTime.now());
     }).toList();
   }
 
   List<Ingredient> getSoonExpiredList() {
     return _ingredientList.where((element) {
       final now = DateTime.now();
-      if (element.expirationDate.isBefore(now)) {
+      if (element.expirationDate.value.isBefore(now)) {
         return false;
       }
 
-      final diff = element.expirationDate.difference(now);
+      final diff = element.expirationDate.value.difference(now);
       return diff <= Duration(days: _alertDays);
     }).toList();
   }
@@ -44,13 +46,18 @@ class IngredientList {
   List<Ingredient> getIngredientListWithSufficientExpirationDate() {
     return _ingredientList.where((element) {
       final now = DateTime.now();
-      if (element.expirationDate.isBefore(now)) {
+      if (element.expirationDate.value.isBefore(now)) {
         return false;
       }
 
-      final diff = element.expirationDate.difference(now);
+      final diff = element.expirationDate.value.difference(now);
       return diff > Duration(days: _alertDays);
     }).toList();
+  }
+
+  bool hasSameNotificationId(int notificationId) {
+    return _ingredientList
+        .any((element) => element.notificationId.value == notificationId);
   }
 
   static IngredientList getEmpty() {

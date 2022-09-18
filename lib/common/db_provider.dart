@@ -41,6 +41,7 @@ class DBProvider {
   Future<void> _createTable(Database db, int version) async {
     await db.execute("CREATE TABLE ${IngredientTableInfo.tableName} ("
         "${IngredientTableInfo.columnId} TEXT PRIMARY KEY,"
+        "${IngredientTableInfo.columnNotificationId} INTEGER UNIQUE,"
         "${IngredientTableInfo.columnCategory} TEXT,"
         "${IngredientTableInfo.columnName} TEXT,"
         "${IngredientTableInfo.columnExpirationData} TEXT"
@@ -51,6 +52,7 @@ class DBProvider {
 class IngredientTableInfo {
   static const String tableName = "ingredient";
   static const String columnId = "id";
+  static const String columnNotificationId = "notification_id";
   static const String columnCategory = "category";
   static const String columnName = "name";
   static const String columnExpirationData = "expiration_date";

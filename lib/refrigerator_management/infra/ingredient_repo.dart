@@ -1,4 +1,5 @@
 import 'package:refrigerator_management/common/db_provider.dart';
+import 'package:refrigerator_management/refrigerator_management/domain/model/ingredient_factory.dart';
 import 'package:refrigerator_management/refrigerator_management/domain/model/models.dart';
 import 'package:refrigerator_management/refrigerator_management/domain/repos/ingredient_repo_base.dart';
 
@@ -65,24 +66,25 @@ class IngredientRepo extends IngredientRepoBase {
   Ingredient _fromMap(Map<String, Object?> map) {
     // ingredient id
     final id = map[IngredientTableInfo.columnId].toString();
-    final ingredientId = IngredientId(id: id);
+
+    final notificationId =
+        int.parse(map[IngredientTableInfo.columnNotificationId].toString());
 
     // category name
     final category = map[IngredientTableInfo.columnCategory].toString();
-    final ingredientCategory = IngredientCategoryName(name: category);
 
     // ingredient name
-    final ingredientName =
-        IngredientName(name: map[IngredientTableInfo.columnName].toString());
+    final ingredientName = map[IngredientTableInfo.columnName].toString();
 
     final expirationDate =
         DateTime.parse(map[IngredientTableInfo.columnExpirationData].toString())
             .toLocal();
 
     // create Ingredient instance
-    return Ingredient(
-      id: ingredientId,
-      categoryName: ingredientCategory,
+    return IngredientFactory.create(
+      id: id,
+      notificationId: notificationId,
+      category: category,
       name: ingredientName,
       expirationDate: expirationDate,
     );

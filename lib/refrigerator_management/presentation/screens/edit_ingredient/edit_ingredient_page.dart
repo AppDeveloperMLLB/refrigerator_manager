@@ -8,6 +8,9 @@ import 'package:refrigerator_management/refrigerator_management/domain/model/ing
 import 'package:refrigerator_management/refrigerator_management/presentation/providers/edit_ingredient_provider.dart';
 import 'package:refrigerator_management/theme/app_theme.dart';
 import 'package:refrigerator_management/theme/font_size.dart';
+import 'package:refrigerator_management/utils/async_value_ui.dart';
+
+import '../../providers/edit_ingredient_state.dart';
 
 class EditIngredientPage extends ConsumerStatefulWidget {
   final IngredientOutputData initialData;
@@ -37,7 +40,11 @@ class _EditIngredientPageState extends ConsumerState<EditIngredientPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = ref.watch(appThemeProvider).textTheme;
+    ref.listen<AsyncValue<EditIngredientState>>(editIngredientProvider,
+        (_, state) {
+      state.showAlertDialogOnError(context);
+    });
+
     final state = ref.watch(editIngredientProvider);
     return state.when(
         data: (ingredientData) => _buildEditIngredientWidget(context),

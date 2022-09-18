@@ -1,21 +1,24 @@
+import 'package:refrigerator_management/refrigerator_management/domain/model/expiration_date.dart';
+import 'package:refrigerator_management/refrigerator_management/domain/model/notification_id.dart';
+
 import 'models.dart';
 
 import 'ingredient.dart';
 
 class IngredientFactory {
-  static Ingredient create(
-      {required String id,
-      required String category,
-      required String name,
-      required DateTime expirationDate}) {
-    final ingredientId = IngredientId(id: id);
-    final ingredientCategoryName = IngredientCategoryName(name: category);
-    final ingredientName = IngredientName(name: name);
+  static Ingredient create({
+    required String id,
+    required int notificationId,
+    required String category,
+    required String name,
+    required DateTime expirationDate,
+  }) {
     return Ingredient(
-      id: ingredientId,
-      categoryName: ingredientCategoryName,
-      name: ingredientName,
-      expirationDate: expirationDate,
+      id: IngredientId(id: id),
+      notificationId: NotificationId(value: notificationId),
+      categoryName: IngredientCategoryName(name: category),
+      name: IngredientName(name: name),
+      expirationDate: ExpirationDate(value: expirationDate),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:refrigerator_management/refrigerator_management/domain/model/expiration_date.dart';
+import 'package:refrigerator_management/refrigerator_management/domain/model/notification_id.dart';
 import 'models.dart';
 part 'ingredient.freezed.dart';
-// JSON用の生成コード
-part 'ingredient.g.dart';
 
 @freezed
 abstract class Ingredient implements _$Ingredient {
@@ -10,13 +10,11 @@ abstract class Ingredient implements _$Ingredient {
 
   factory Ingredient({
     required IngredientId id,
+    required NotificationId notificationId,
     required IngredientCategoryName categoryName,
     required IngredientName name,
-    required DateTime expirationDate,
+    required ExpirationDate expirationDate,
   }) = _Ingredient;
-
-  factory Ingredient.fromJson(Map<String, dynamic> json) =>
-      _$IngredientFromJson(json);
 
   String getId() {
     return id.id;
@@ -31,6 +29,10 @@ abstract class Ingredient implements _$Ingredient {
   }
 
   DateTime getExpirationDate() {
-    return expirationDate;
+    return expirationDate.value;
+  }
+
+  DateTime getDateBeforeExpiration(int daysBefore) {
+    return expirationDate.getDateBeforeExpiration(daysBefore);
   }
 }

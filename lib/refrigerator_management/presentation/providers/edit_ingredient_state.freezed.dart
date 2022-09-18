@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$EditIngredientState {
   String get id => throw _privateConstructorUsedError;
+  int get notificationId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   DateTime get dateTime => throw _privateConstructorUsedError;
@@ -31,7 +32,12 @@ abstract class $EditIngredientStateCopyWith<$Res> {
   factory $EditIngredientStateCopyWith(
           EditIngredientState value, $Res Function(EditIngredientState) then) =
       _$EditIngredientStateCopyWithImpl<$Res>;
-  $Res call({String id, String name, String category, DateTime dateTime});
+  $Res call(
+      {String id,
+      int notificationId,
+      String name,
+      String category,
+      DateTime dateTime});
 }
 
 /// @nodoc
@@ -46,6 +52,7 @@ class _$EditIngredientStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? notificationId = freezed,
     Object? name = freezed,
     Object? category = freezed,
     Object? dateTime = freezed,
@@ -55,6 +62,10 @@ class _$EditIngredientStateCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      notificationId: notificationId == freezed
+          ? _value.notificationId
+          : notificationId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -78,7 +89,12 @@ abstract class _$$_EditIngredientStateCopyWith<$Res>
           $Res Function(_$_EditIngredientState) then) =
       __$$_EditIngredientStateCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, String category, DateTime dateTime});
+  $Res call(
+      {String id,
+      int notificationId,
+      String name,
+      String category,
+      DateTime dateTime});
 }
 
 /// @nodoc
@@ -95,6 +111,7 @@ class __$$_EditIngredientStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? notificationId = freezed,
     Object? name = freezed,
     Object? category = freezed,
     Object? dateTime = freezed,
@@ -104,6 +121,10 @@ class __$$_EditIngredientStateCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      notificationId: notificationId == freezed
+          ? _value.notificationId
+          : notificationId // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -125,6 +146,7 @@ class __$$_EditIngredientStateCopyWithImpl<$Res>
 class _$_EditIngredientState extends _EditIngredientState {
   const _$_EditIngredientState(
       {required this.id,
+      required this.notificationId,
       required this.name,
       required this.category,
       required this.dateTime})
@@ -132,6 +154,8 @@ class _$_EditIngredientState extends _EditIngredientState {
 
   @override
   final String id;
+  @override
+  final int notificationId;
   @override
   final String name;
   @override
@@ -141,7 +165,7 @@ class _$_EditIngredientState extends _EditIngredientState {
 
   @override
   String toString() {
-    return 'EditIngredientState(id: $id, name: $name, category: $category, dateTime: $dateTime)';
+    return 'EditIngredientState(id: $id, notificationId: $notificationId, name: $name, category: $category, dateTime: $dateTime)';
   }
 
   @override
@@ -150,6 +174,8 @@ class _$_EditIngredientState extends _EditIngredientState {
         (other.runtimeType == runtimeType &&
             other is _$_EditIngredientState &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality()
+                .equals(other.notificationId, notificationId) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.category, category) &&
             const DeepCollectionEquality().equals(other.dateTime, dateTime));
@@ -159,6 +185,7 @@ class _$_EditIngredientState extends _EditIngredientState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(notificationId),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(category),
       const DeepCollectionEquality().hash(dateTime));
@@ -173,6 +200,7 @@ class _$_EditIngredientState extends _EditIngredientState {
 abstract class _EditIngredientState extends EditIngredientState {
   const factory _EditIngredientState(
       {required final String id,
+      required final int notificationId,
       required final String name,
       required final String category,
       required final DateTime dateTime}) = _$_EditIngredientState;
@@ -180,6 +208,8 @@ abstract class _EditIngredientState extends EditIngredientState {
 
   @override
   String get id => throw _privateConstructorUsedError;
+  @override
+  int get notificationId => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
   @override
